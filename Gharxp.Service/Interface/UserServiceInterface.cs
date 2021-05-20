@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Gharxp.Service.Interface
 {
@@ -11,6 +12,6 @@ namespace Gharxp.Service.Interface
 
         bool UpdateUser(User user);
 
-        IEnumerable<User> GetAll();
+        Task<IEnumerable<User>> GetAll();
     }
 }
