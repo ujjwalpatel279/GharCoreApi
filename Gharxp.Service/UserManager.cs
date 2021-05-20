@@ -7,7 +7,7 @@ using Gharxp.Service.Interface;
 
 namespace Gharxp.Service
 {
-    public class UserManager :IuserInterface
+    public class UserManager :UserServiceInterface
     {
         private UserRepoInterface _UserRepo;
 
@@ -20,6 +20,11 @@ namespace Gharxp.Service
         public bool AddUser(User user)
         {
             return _UserRepo.Add(user);
+        }
+
+        public bool UpdateUser(User user)
+        {
+            return _UserRepo.Update(user);
         }
 
         public IEnumerable<User> GetAll()

@@ -15,9 +15,9 @@ namespace Gharxp.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IuserInterface _userservice;
+        private readonly UserServiceInterface _userservice;
 
-        public  UserController(IuserInterface user)
+        public  UserController(UserServiceInterface user)
         {
             this._userservice = user;
         }
@@ -31,8 +31,16 @@ namespace Gharxp.Controllers
         [HttpPost]
         public void Post(User user)
         {
-            if (ModelState.IsValid)
-                _userservice.AddUser(user);
+            if (user.Id == 0 ||  user.Id == null)
+            {
+                if (ModelState.IsValid)
+                    _userservice.AddUser(user);
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                    _userservice.UpdateUser(user);
+            }
         }
            
     }

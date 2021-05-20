@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Gharxp.Service;
 using Gharxp.Service.Interface;
 using Gharxp.Repository.Interface;
+//using Microsoft.AspNetCore.Cors;
 using Gharxp.Repository;
 
 using Microsoft.Extensions.Logging;
@@ -34,8 +35,14 @@ namespace Gharxp
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             
-            services.AddScoped<IuserInterface,UserManager>();
+            services.AddScoped<UserServiceInterface,UserManager>();
             services.AddScoped<UserRepoInterface, UserRepository>();
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
+
 
         }
 
@@ -51,6 +58,7 @@ namespace Gharxp
                 app.UseHsts();
             }
 
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
             app.UseMvc();
         }

@@ -17,19 +17,7 @@ namespace Gharxp.Repository
     {
         private string ConnectionString;
 
-        //public UserRepository()
-        //{
-        //    ConnectionString = @"Data Source=UJJWAL-PC;Initial Catalog=gharxp;Integrated Security=true";
-        //}
-
-        //public IDbConnection Connection
-        //{
-        //    get
-        //    {
-        //        return new SqlConnection();
-        //    }
-        //}
-
+       
         protected IDbConnection con;
         public UserRepository()
         {
@@ -37,19 +25,38 @@ namespace Gharxp.Repository
             con = new SqlConnection(connectionString);
         }
 
-        public bool Add(User Usr)
+        public bool Add(User user)
         {
-            //using (IDbConnection dbConnection = Connection)
-            //{
-            //    string Query = @"insert into User(Name,AreaName,EmailId,ContactNo,Pincode,City,State) Values(@Name,@AreaName,@EmailId,@ContactNo,@Pincode,@City,@State)";
-            //    dbConnection.Open();
-            //    dbConnection.Execute(Query, Usr);
-            //    return true;
 
-            //}
+            string sQuery = @"usp_tbl_User_Insert";
+            con.Open();
+            con.Execute(sQuery, user);
+            return true;
+
+            //DynamicParameters parameters = new DynamicParameters();
+            //parameters.Add("@Name", user.Name);
+            //parameters.Add("@AreaName", user.AreaName);
+            //parameters.Add("@EmailId", user.EmailId);
+            //parameters.Add("@ContactNo", user.ContactNo);
+            //parameters.Add("@Pincode", user.Pincode);
+            //parameters.Add("@City", user.City);
+            //parameters.Add("@State", user.State);
+            //SqlMapper.Execute(con, "Add", param, parameters , CommandType.StoredProcedure);
+            //con.Execute(parameters, CommandType.StoredProcedure);
+            //return true;
+
+        }
+
+        public bool Update(User user)
+        {
+
+            string sQuery = @"usp_tbl_User_Update";
+            con.Open();
+            con.Execute(sQuery, user);
             return true;
 
         }
+
 
         public IEnumerable<User> GetAll()
         {

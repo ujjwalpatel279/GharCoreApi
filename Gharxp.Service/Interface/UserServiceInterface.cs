@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gharxp.Repository.Interface
+namespace Gharxp.Service.Interface
 {
-    public interface UserRepoInterface
+    public interface UserServiceInterface
     {
-        bool Add(User Usr);
+        bool AddUser(User user);
 
-        bool Update(User user);
+        bool UpdateUser(User user);
 
         IEnumerable<User> GetAll();
     }
