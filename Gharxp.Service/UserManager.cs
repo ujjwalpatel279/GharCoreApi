@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Gharxp.Entities;
 using Gharxp.Repository.Interface;
 using Gharxp.Service.Interface;
@@ -27,9 +28,9 @@ namespace Gharxp.Service
             return _UserRepo.Update(user);
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<IEnumerable<User>> GetAll()
         {
-            var UserDetails = _UserRepo.GetAll();
+            var UserDetails = await _UserRepo.GetAll();
             return UserDetails;
         }
     }

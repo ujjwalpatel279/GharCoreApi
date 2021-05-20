@@ -23,9 +23,9 @@ namespace Gharxp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<User> Get()
+        public async Task<IEnumerable<User>> Get()
         {
-            return _userservice.GetAll();
+            return await _userservice.GetAll();
         }
 
         [HttpPost]

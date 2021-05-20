@@ -10,14 +10,15 @@ using static System.Data.CommandType;
 using System.Linq;
 
 using System.Data.Common;
+using System.Threading.Tasks;
 
 namespace Gharxp.Repository
 {
-    public class UserRepository : UserRepoInterface
+    public class UserRepository : BaseRepo<User>, UserRepoInterface
     {
         private string ConnectionString;
 
-       
+
         protected IDbConnection con;
         public UserRepository()
         {
@@ -58,13 +59,13 @@ namespace Gharxp.Repository
         }
 
 
-        public IEnumerable<User> GetAll()
+        public async Task<IEnumerable<User>> GetAll()
         {
-          
-            string sQuery = @"usp_tbl_User_SelectAll";
-            con.Open();
-            return SqlMapper.Query<User>(con,sQuery, commandType: CommandType.StoredProcedure);
-          
+
+            //string sQuery = @"usp_tbl_User_SelectAll";
+            //con.Open();
+            //return SqlMapper.Query<User>(con,sQuery, commandType: CommandType.StoredProcedure);
+            return await GetAll("usp_tbl_User_SelectAll", null);
         }
     }
 }
